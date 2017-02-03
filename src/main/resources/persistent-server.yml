@@ -1,0 +1,48 @@
+# Configure this Discovery Server
+eureka:
+  client:  
+    serviceUrl:
+      defaultZone: http://localhost:1111/eureka/
+  instance:
+    leaseRenewalIntervalInSeconds: 5 # DO NOT DO THIS IN PRODUCTION
+     
+server:
+  port: 2222   # HTTP (Tomcat) port
+
+# Discovery Server Dashboard uses FreeMarker.  Don't want Thymeleaf templates
+spring:
+  application:
+    name: persistence-service
+    
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/nimesh
+    name: nimesh
+    username: nimesh
+    password: nimesh
+    
+  jpa:
+    database: POSTGRESQL
+    show_sql: true
+    properties:
+      hibernate.cache.use_second_level_cache: false
+      hibernate.cache.use_query_cache: false
+      hibernate.generate_statistics: true
+      hibernate.cache.use_minimal_puts: true
+  
+liquibase:
+  change-log: classpath:liquibase/master.xml
+  
+endpoints:
+  info:
+    id: information
+    sensitive: false
+    enabled: true
+ 
+info:
+  app:
+    name: Persistence Service
+    description: Persistence Service helps other services interact with the database.
+    version: 1
+    
+
