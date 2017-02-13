@@ -29,6 +29,7 @@ spring:
       hibernate.cache.use_query_cache: false
       hibernate.generate_statistics: true
       hibernate.cache.use_minimal_puts: true
+      hibernate.hbm2ddl.auto: update
   
 liquibase:
   change-log: classpath:liquibase/master.xml
