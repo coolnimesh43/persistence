@@ -1,5 +1,7 @@
 package com.coolnimesh43.persistence.rest.service.impl;
 
+import javax.inject.Inject;
+
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +14,6 @@ import com.coolnimesh43.persistence.mapper.UserMapper;
 import com.coolnimesh43.persistence.repository.UserRepository;
 import com.coolnimesh43.persistence.rest.dto.UserDTO;
 import com.coolnimesh43.persistence.rest.service.UserService;
-import com.google.inject.Inject;
 
 @Transactional(readOnly = true)
 @Service

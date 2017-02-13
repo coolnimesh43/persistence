@@ -9,6 +9,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     User findOneByLogin(String login);
 
-    @Query(value = "Select * from user_table u where LOWER(email) = LOWER(?1)")
+    @Query(value = "Select u.* from user_table u where LOWER(u.email) = LOWER(?1)", nativeQuery = true)
     User findByEmail(String email);
 }
