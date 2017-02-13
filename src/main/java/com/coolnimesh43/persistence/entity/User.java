@@ -52,6 +52,9 @@ public class User extends AbstractAuditEntity {
     @Column(name = "login", nullable = false, updatable = false, unique = true)
     private String login;
 
+    @Column(name = "enabled", nullable = false)
+    private Boolean enabled = Boolean.TRUE;
+
     public User() {
         super();
     }
@@ -70,6 +73,7 @@ public class User extends AbstractAuditEntity {
         this.salt = builder.salt;
         this.password = builder.password;
         this.login = builder.login;
+        this.enabled = builder.enabled;
     }
 
     public Long getId() {
@@ -128,6 +132,14 @@ public class User extends AbstractAuditEntity {
         this.login = login;
     }
 
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
     @Override
     public String toString() {
         return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", login=" + login + "]";
@@ -140,6 +152,7 @@ public class User extends AbstractAuditEntity {
         private String salt;
         private String password;
         private String login;
+        private Boolean enabled;
 
         public Builder(String firstName, String email, String login) {
             super();
@@ -175,6 +188,11 @@ public class User extends AbstractAuditEntity {
 
         public Builder login(String login) {
             this.login = login;
+            return this;
+        }
+
+        public Builder enabled(Boolean enabled) {
+            this.enabled = enabled;
             return this;
         }
 
