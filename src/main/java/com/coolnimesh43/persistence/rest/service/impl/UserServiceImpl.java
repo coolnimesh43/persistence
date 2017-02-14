@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.coolnimesh43.persistence.entity.User;
-import com.coolnimesh43.persistence.exception.UserNotFoundException;
+import com.coolnimesh43.persistence.exception.EntityNotFoundException;
 import com.coolnimesh43.persistence.mapper.UserMapper;
 import com.coolnimesh43.persistence.repository.UserRepository;
 import com.coolnimesh43.persistence.rest.dto.UserDTO;
@@ -28,10 +28,12 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public UserDTO findById(Long id) {
-        User user = this.userRepository.findOne(id);
-        if (user != null) {
-            return this.userMapper.userToUserDTO(user);
+    public UserDTO findOne(Long id) {
+        if (id != null) {
+            User user = this.userRepository.findOne(id);
+            if (user != null) {
+                return this.userMapper.userToUserDTO(user);
+            }
         }
         return null;
     }
@@ -80,13 +82,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void delete(Long id) throws UserNotFoundException {
+    public void delete(Long id) {
         User user = this.userRepository.findOne(id);
         if (user != null) {
             user.setEnabled(Boolean.FALSE);
             this.userRepository.save(user);
         } else {
-            throw new UserNotFoundException("User not found with key " + id);
+            throw new EntityNotFoundException("User not found with key " + id);
         }
     }
 

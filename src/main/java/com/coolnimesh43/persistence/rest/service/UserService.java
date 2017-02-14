@@ -1,10 +1,9 @@
 package com.coolnimesh43.persistence.rest.service;
 
 import com.coolnimesh43.persistence.entity.User;
-import com.coolnimesh43.persistence.exception.UserNotFoundException;
 import com.coolnimesh43.persistence.rest.dto.UserDTO;
 
-public interface UserService {
+public interface UserService extends AbstractService<UserDTO, Long> {
 
     /**
      * Find {@link User} by primary key, id.
@@ -14,7 +13,8 @@ public interface UserService {
      *            {@link Long} {@link User#getId()}
      * @return {@link User} The entity is returned if it exists, else null.
      */
-    UserDTO findById(Long id);
+    @Override
+    UserDTO findOne(Long id);
 
     /**
      * Find {@link User} by login {@link User#getLogin()}.
@@ -44,6 +44,7 @@ public interface UserService {
      *            {@link UserDTO} The user details to be saved.
      * @return {@link User} The saved entity.
      */
+    @Override
     UserDTO save(UserDTO user);
 
     /**
@@ -53,5 +54,6 @@ public interface UserService {
      * @param id
      *            {@link Long} The primary key
      */
-    void delete(Long id) throws UserNotFoundException;
+    @Override
+    void delete(Long id);
 }

@@ -19,6 +19,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Type;
 
+import com.coolnimesh43.persistence.constant.PersistenceConstant;
 import com.coolnimesh43.persistence.enums.ProjectPriority;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -62,6 +63,10 @@ public class Project implements Serializable {
     @JsonIgnore
     private Project parentProject;
 
+    @Column(name = "status", nullable = false)
+    @NotNull
+    private String status = PersistenceConstant.Status.ACTIVE;
+
     public Project() {
         super();
     }
@@ -75,6 +80,7 @@ public class Project implements Serializable {
         this.projectImage = builder.projectImage;
         this.projectAssetFolderName = builder.projectAssetFolderName;
         this.parentProject = builder.parentProject;
+        this.status = builder.status;
     }
 
     public Long getId() {
@@ -149,6 +155,14 @@ public class Project implements Serializable {
         this.parentProject = parentProject;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "Project [id=" + id + ", name=" + name + ", startDate=" + startDate + ", endDate=" + endDate + ", priority=" + priority
@@ -165,6 +179,7 @@ public class Project implements Serializable {
         private String projectImage;
         private String projectAssetFolderName;
         private Project parentProject;
+        private String status;
 
         public Builder(String name) {
             this.name = name;
@@ -202,6 +217,11 @@ public class Project implements Serializable {
 
         public Builder parentProject(Project parentProject) {
             this.parentProject = parentProject;
+            return this;
+        }
+
+        public Builder status(String status) {
+            this.status = status;
             return this;
         }
 
