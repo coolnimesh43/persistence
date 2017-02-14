@@ -24,7 +24,7 @@ public interface UserService extends AbstractService<UserDTO, Long> {
      *            {@link String} The login of the user {@link User#getLogin()}
      * @return {@link User} The entity is returns if it exists, else null.
      */
-    UserDTO findByLogin(String login);
+    User findByLogin(String login);
 
     /**
      * Find {@link User} by user's email, {@link User#getEmail()}.

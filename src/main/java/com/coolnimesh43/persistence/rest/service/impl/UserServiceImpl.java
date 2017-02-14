@@ -39,19 +39,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO findByLogin(String login) {
-        UserDTO userDTO = null;
+    public User findByLogin(String login) {
+        User user = null;
         try {
             if (StringUtils.isNotBlank(login)) {
-                User user = this.userRepository.findOneByLogin(login);
+                user = this.userRepository.findOneByLogin(login);
                 if (user != null) {
-                    return this.userMapper.userToUserDTO(user);
+                    return user;
                 }
             }
         } catch (Exception e) {
             log.error("Exception occurred while trying to find user by login : {}. Exception is: {}", login, e);
         }
-        return userDTO;
+        return user;
     }
 
     @Override
