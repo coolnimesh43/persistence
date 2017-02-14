@@ -11,6 +11,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.coolnimesh43.persistence.constant.PersistenceConstant;
+
 @Entity
 @Table(name = "project_member")
 public class ProjectMember {
@@ -22,7 +24,7 @@ public class ProjectMember {
     @NotNull
     @Size(max = 10)
     @Column(name = "status", length = 10, nullable = false)
-    private String status;
+    private String status = PersistenceConstant.Status.ACTIVE;
 
     @ManyToOne
     @JoinColumn(name = "project_id")

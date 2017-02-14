@@ -37,6 +37,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    @Transactional
     public ProjectDTO save(ProjectDTO projectDTO) {
         if (projectDTO != null) {
             Project project = this.projectMapper.projectDTOToProject(projectDTO);
@@ -47,6 +48,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
         if (id != null) {
             Project project = this.projectRepository.findOne(id);
