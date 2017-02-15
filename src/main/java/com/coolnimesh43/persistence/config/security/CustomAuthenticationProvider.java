@@ -17,7 +17,8 @@ import org.springframework.stereotype.Component;
 import com.coolnimesh43.persistence.entity.User;
 import com.coolnimesh43.persistence.rest.service.UserService;
 
-@Component("customAuthenticationProvider")
+@Component
+// @Qualifier("customAuthenticationProvider")
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());

@@ -3,6 +3,8 @@ package com.coolnimesh43.persistence.rest.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,7 +17,6 @@ import com.coolnimesh43.persistence.repository.ProjectMemberRepository;
 import com.coolnimesh43.persistence.rest.dto.ProjectMemberDTO;
 import com.coolnimesh43.persistence.rest.service.ProjectMemberService;
 import com.coolnimesh43.persistence.rest.service.UserService;
-import com.google.inject.Inject;
 
 @Service
 @Transactional(readOnly = true)

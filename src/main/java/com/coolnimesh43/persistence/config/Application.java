@@ -16,7 +16,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@ComponentScan
+@ComponentScan(basePackages = { "com.coolnimesh43.persistence" })
 @EnableAspectJAutoProxy
 @EntityScan("com.coolnimesh43.persistence.entity")
 @EnableJpaRepositories("com.coolnimesh43.persistence.repository")

@@ -15,8 +15,8 @@ import com.coolnimesh43.persistence.repository.UserRepository;
 import com.coolnimesh43.persistence.rest.dto.UserDTO;
 import com.coolnimesh43.persistence.rest.service.UserService;
 
-@Transactional(readOnly = true)
 @Service
+@Transactional(readOnly = true)
 public class UserServiceImpl implements UserService {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());

@@ -46,4 +46,10 @@ info:
     description: Persistence Service helps other services interact with the database.
     version: 1
     
+persistence:
+  security:
+    xauth:
+      token: IamAweS0Me
+      validityPeriod: 8640000 
+    
 

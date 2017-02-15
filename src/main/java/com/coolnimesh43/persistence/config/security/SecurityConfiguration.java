@@ -2,7 +2,6 @@ package com.coolnimesh43.persistence.config.security;
 
 import javax.inject.Inject;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -28,11 +27,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private HttpUnAuthorizedAccessEntryPoint httpUnAuthorizedEntryPoint;
 
     @Inject
-    @Qualifier("customUserDetailService")
+    // @Qualifier("customUserDetailService")
     private UserDetailsService userDetailsService;
 
     @Inject
-    @Qualifier("customAuthenticationProvider")
+    // @Qualifier("customAuthenticationProvider")
     private AuthenticationProvider authenticationProvider;
 
     @Inject

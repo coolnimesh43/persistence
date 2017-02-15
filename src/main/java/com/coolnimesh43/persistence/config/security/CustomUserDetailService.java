@@ -14,18 +14,19 @@ import org.springframework.stereotype.Component;
 import com.coolnimesh43.persistence.entity.User;
 import com.coolnimesh43.persistence.rest.service.UserService;
 
-@Component("customUserDetailService")
+@Component
+// @Qualifier("customUserDetailService")
 public class CustomUserDetailService implements UserDetailsService {
 
     private Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Inject
-    private UserService userService;
+    private UserService userServiceImpl;
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         log.debug("LoadByUserName for login : {}", login);
-        User user = this.userService.findByLogin(login);
+        User user = this.userServiceImpl.findByLogin(login);
         if (user != null) {
             return new org.springframework.security.core.userdetails.User(login, user.getPassword(), new ArrayList<>());
         } else {
