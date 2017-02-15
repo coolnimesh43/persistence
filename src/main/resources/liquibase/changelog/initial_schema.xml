@@ -1,0 +1,140 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+	<property name="now" value="now()" dbms="mysql,h2" />
+	<property name="now" value="current_timestamp" dbms="postgresql" />
+	<property name="now" value="sysdate" dbms="oracle" />
+
+	<property name="autoIncrement" value="true"
+		dbms="mysql,h2,postgresql,oracle" />
+
+	<!-- Table User -->
+	<changeSet author="coolnimesh43 (generated)" id="1487147774707-4">
+
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="user_table" />
+			</not>
+		</preConditions>
+
+		<createTable tableName="user_table">
+			<column name="id" type="bigint" autoIncrement="${autoIncrement}">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="created_by" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="created_date" type="timestamp" defaultValueDate="${now}">
+				<constraints nullable="false" />
+			</column>
+			<column name="last_modified_by" type="VARCHAR(255)" />
+			<column name="last_modified_date" type="timestamp" />
+			<column name="email" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="first_name" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="last_name" type="VARCHAR(255)" />
+			<column name="login" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="password" type="TEXT">
+				<constraints nullable="false" />
+			</column>
+			<column name="salt" type="TEXT">
+				<constraints nullable="false" />
+			</column>
+			<column name="enabled" type="BOOLEAN">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<loadData encoding="UTF-8" file="liquibase/user.csv"
+			separator=";" tableName="user_table" />
+
+	</changeSet>
+
+	<!-- Table project -->
+	<changeSet author="coolnimesh43 (generated)" id="1487147774707-2">
+
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="project" />
+			</not>
+		</preConditions>
+
+		<createTable tableName="project">
+			<column name="id" type="bigint" autoIncrement="${autoIncrement}">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="description" type="TEXT" />
+			<column name="end_date" type="timestamp" />
+			<column name="name" type="VARCHAR(200)">
+				<constraints nullable="false" />
+			</column>
+			<column name="priority" type="INT" />
+			<column name="project_asset_folder_name" type="VARCHAR(50)" />
+			<column name="project_image" type="VARCHAR(300)" />
+			<column name="start_date" type="BYTEA" />
+			<column name="parent_project_id" type="BIGINT" />
+			<column name="status" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+
+			<column name="created_by" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="created_date" type="timestamp" defaultValueDate="${now}">
+				<constraints nullable="false" />
+			</column>
+			<column name="last_modified_by" type="VARCHAR(255)" />
+			<column name="last_modified_date" type="timestamp" />
+		</createTable>
+
+		<loadData encoding="UTF-8" file="liquibase/project.csv"
+			separator=";" tableName="project" />
+
+	</changeSet>
+
+	<!-- Table ProjectMember -->
+	<changeSet author="coolnimesh43 (generated)" id="1487147774707-3">
+
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="project_member" />
+			</not>
+			<tableExists tableName="user_table" />
+			<tableExists tableName="project" />
+		</preConditions>
+
+		<createTable tableName="project_member">
+
+			<column name="id" type="bigint" autoIncrement="${autoIncrement}">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="status" type="VARCHAR(10)">
+				<constraints nullable="false" />
+			</column>
+			<column name="project_id" type="BIGINT" />
+			<column name="user_id" type="BIGINT" />
+
+			<column name="created_by" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="created_date" type="timestamp" defaultValueDate="${now}">
+				<constraints nullable="false" />
+			</column>
+			<column name="last_modified_by" type="VARCHAR(255)" />
+			<column name="last_modified_date" type="timestamp" />
+
+		</createTable>
+
+		<loadData encoding="UTF-8" file="liquibase/project-member.csv"
+			separator=";" tableName="project_member" />
+
+	</changeSet>
+
+</databaseChangeLog>

@@ -33,6 +33,7 @@ spring:
   
 liquibase:
   change-log: classpath:liquibase/master.xml
+  contexts: dev
   
 endpoints:
   info:
@@ -50,6 +51,10 @@ persistence:
   security:
     xauth:
       token: IamAweS0Me
-      validityPeriod: 8640000 
+      validityPeriod: 8640000
+  async:
+    corePoolSize: 5
+    maxPoolSize: 50
+    queueCapacity: 10000 
     
 

@@ -13,14 +13,14 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
 @MappedSuperclass
-public class AbstractAuditEntity implements Serializable {
+public abstract class AbstractAuditEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Column(name = "created_date", nullable = false, length = 30)
     @NotNull
     @CreatedDate
-    private ZonedDateTime createdDate;
+    private ZonedDateTime createdDate = ZonedDateTime.now();
 
     @Column(name = "created_by", nullable = false)
     @NotNull
@@ -29,7 +29,7 @@ public class AbstractAuditEntity implements Serializable {
 
     @Column(name = "last_modified_date")
     @LastModifiedDate
-    private ZonedDateTime lastModifiedDate;
+    private ZonedDateTime lastModifiedDate = ZonedDateTime.now();
 
     @Column(name = "last_modified_by")
     @LastModifiedBy
