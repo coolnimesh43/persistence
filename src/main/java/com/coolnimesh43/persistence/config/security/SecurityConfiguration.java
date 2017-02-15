@@ -56,12 +56,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.exceptionHandling().authenticationEntryPoint(this.httpUnAuthorizedEntryPoint).and().csrf().disable().headers()
                 .frameOptions().disable().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests().anyRequest().authenticated().and().apply(configurer());
+                .authorizeRequests().antMatchers("/api/signup", "/api/auth").permitAll().anyRequest().authenticated().and()
+                .apply(configurer());
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/api/auth");
+        web.ignoring().antMatchers("/resources/**");
     }
 
     public XAuthTokenConfigurer configurer() {

@@ -8,11 +8,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.coolnimesh43.persistence.constant.PersistenceConstant;
 import com.coolnimesh43.persistence.entity.ProjectMember;
+import com.coolnimesh43.persistence.entity.User;
 import com.coolnimesh43.persistence.exception.EntityNotFoundException;
 import com.coolnimesh43.persistence.mapper.ProjectMemberMapper;
 import com.coolnimesh43.persistence.repository.ProjectMemberRepository;
 import com.coolnimesh43.persistence.rest.dto.ProjectMemberDTO;
 import com.coolnimesh43.persistence.rest.service.ProjectMemberService;
+import com.coolnimesh43.persistence.rest.service.UserService;
 import com.google.inject.Inject;
 
 @Service
@@ -24,6 +26,9 @@ public class ProjectMemberServiceImpl implements ProjectMemberService {
 
     @Inject
     private ProjectMemberMapper projectMemberMapper;
+
+    @Inject
+    private UserService userService;
 
     @Override
     public ProjectMemberDTO findOne(Long id) {
@@ -91,6 +96,17 @@ public class ProjectMemberServiceImpl implements ProjectMemberService {
             ProjectMember projectMember = this.projectMemberRepository.findOneByProjectIdAndUserIdAndStatus(projectId, userId, status);
             if (projectMember != null) {
                 return this.projectMemberMapper.projectMemberToProjectMemberDTO(projectMember);
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public ProjectMemberDTO findOneByProjectIdAndUserLoginAndStatus(Long projectId, String login, String status) {
+        if (projectId != null && login != null && status != null) {
+            User user = this.userService.findByLogin(login);
+            if (user != null) {
+                return this.findOneByProjectIdAndUserIdAndStatus(projectId, user.getId(), status);
             }
         }
         return null;

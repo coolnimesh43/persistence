@@ -44,4 +44,6 @@ public interface ProjectMemberService extends AbstractService<ProjectMemberDTO, 
      * @return {@link ProjectMemberDTO}
      */
     ProjectMemberDTO findOneByProjectIdAndUserIdAndStatus(Long projectId, Long userId, String status);
+
+    ProjectMemberDTO findOneByProjectIdAndUserLoginAndStatus(Long projectId, String login, String status);
 }

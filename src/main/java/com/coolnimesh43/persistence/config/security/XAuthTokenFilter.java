@@ -20,6 +20,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.filter.GenericFilterBean;
 
 import com.coolnimesh43.persistence.constant.PersistenceConstant;
+import com.coolnimesh43.persistence.rest.dto.ProjectMemberDTO;
 import com.coolnimesh43.persistence.rest.service.ProjectMemberService;
 
 public class XAuthTokenFilter extends GenericFilterBean {
@@ -64,6 +65,7 @@ public class XAuthTokenFilter extends GenericFilterBean {
                 UsernamePasswordAuthenticationToken token =
                         new UsernamePasswordAuthenticationToken(details, details.getPassword(), new ArrayList<>());
                 SecurityContextHolder.getContext().setAuthentication(token);
+
                 for (String endPoint : PersistenceConstant.OPEN_RS_END_POINT) {
                     if (requestPath.contains(endPoint)) {
                         filterChain.doFilter(httpServletRequest, servletResponse);
@@ -76,39 +78,13 @@ public class XAuthTokenFilter extends GenericFilterBean {
                 }
                 Long projectId = Long.parseLong(authProject);
 
-                // String openEndpointArr[] = OnTargetConstant.OPEN_RS_ENDPOINT.split(",");
-                // log.info("open end points: {} ", OnTargetConstant.OPEN_RS_ENDPOINT);
-                // for (String openEndpoint : openEndpointArr) {
-                // if (requestPath.contains(openEndpoint)) {
-                // filterChain.doFilter(servletRequest, servletResponse);
-                // return;
-                // }
-                // }
-
-                // validate if the user and project is valid.
-                // if (authProject == null) {
-                // ((HttpServletResponse) servletResponse).sendError(HttpServletResponse.SC_BAD_REQUEST, USER_PROJECT_NOT_AUTHORIZED);
-                // return;
-                // } else {
-                // Long projectId = Long.parseLong(authProject);
-                // Optional<ProjectMember> projectMember =
-                // projectMemberService.findMemberByProjectIdAndUserIdAndStatus(username, projectId);
-                // if (!projectMember.isPresent()) {
-                // // user is authorized to move forward as userid is part of project id.
-                // ((HttpServletResponse) servletResponse).sendError(HttpServletResponse.SC_BAD_REQUEST, USER_PROJECT_NOT_AUTHORIZED);
-                // return;
-                // }
-                // Long userId = projectMember.get().getUser().getId();
-                // UserProjectAuthorityDTO userProjectAuthorityDTO =
-                // this.userProjectAuthorityService.findByProjectIdAndUserIdAndStatusActive(projectId, userId);
-                // if (userProjectAuthorityDTO != null) {
-                // List<SimpleGrantedAuthority> projectAuthorities = new ArrayList<>();
-                // projectAuthorities.add(new SimpleGrantedAuthority(userProjectAuthorityDTO.getAuthority_name()));
-                // UsernamePasswordAuthenticationToken token =
-                // new UsernamePasswordAuthenticationToken(details, details.getPassword(), projectAuthorities);
-                // SecurityContextHolder.getContext().setAuthentication(token);
-                // }
-
+                ProjectMemberDTO memberDTO = this.projectMemberService.findOneByProjectIdAndUserLoginAndStatus(projectId, username,
+                        PersistenceConstant.Status.ACTIVE);
+                if (memberDTO == null) {
+                    ((HttpServletResponse) servletResponse).sendError(HttpServletResponse.SC_BAD_REQUEST,
+                            "User is unauthorized to view this project.");
+                    return;
+                }
             }
             filterChain.doFilter(servletRequest, servletResponse);
         } catch (Exception ex) {
