@@ -21,7 +21,7 @@ public class LoggingAspect {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    @Pointcut("within(* com.coolnimesh43.persistence.*)")
+    @Pointcut("execution(* com.coolnimesh43.persistence..*(..))")
     public void loggingPointcut() {
     }
 
