@@ -9,13 +9,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.coolnimesh43.persistence.entity.User;
 import com.coolnimesh43.persistence.rest.service.UserService;
 
-@Component
-// @Qualifier("customUserDetailService")
+@Service("customUserDetailService")
 public class CustomUserDetailService implements UserDetailsService {
 
     private Logger log = LoggerFactory.getLogger(this.getClass());

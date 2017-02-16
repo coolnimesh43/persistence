@@ -15,7 +15,10 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.http.MediaType;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.coolnimesh43.persistence.config.security.PersistenceProperties;
 import com.coolnimesh43.persistence.config.security.SecurityUtil;
@@ -35,7 +38,12 @@ import com.coolnimesh43.persistence.config.security.SecurityUtil;
 @EnableJpaRepositories("com.coolnimesh43.persistence.repository")
 @EnableTransactionManagement
 @EnableJpaAuditing(auditorAwareRef = "springSecurityAuditorAware")
-public class Application {
+public class Application extends WebMvcConfigurerAdapter {
+
+    @Override
+    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+        configurer.favorPathExtension(false).favorParameter(true).defaultContentType(MediaType.APPLICATION_JSON);
+    }
 
     public static void main(String[] args) throws UnknownHostException {
         System.setProperty("spring.config.name", "persistent-server");

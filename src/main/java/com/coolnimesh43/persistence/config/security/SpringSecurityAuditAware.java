@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * @author coolnimesh43
  *
  */
-@Component
+@Component(value = "springSecurityAuditorAware")
 public class SpringSecurityAuditAware implements AuditorAware<String> {
 
     @Override

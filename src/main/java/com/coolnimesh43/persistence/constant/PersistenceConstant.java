@@ -13,4 +13,11 @@ public interface PersistenceConstant {
         public static final String X_AUTH_PROJECT_ID = "x-auth-project-id";
         public static final String X_AUTH_TOKEN = "x-auth-token";
     }
+
+    public interface Response {
+        public interface Value {
+            public static final String SUCCESS = "success";
+            public static final String ERROR = "error";
+        }
+    }
 }

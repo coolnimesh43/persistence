@@ -21,7 +21,7 @@
         <appender-ref ref="FILE"/>
     </appender>
 
-    <logger name="org.coolnimesh43" level="DEBUG"/>
+    <logger name="com.coolnimesh43.persistence" level="DEBUG"/>
     <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
         <resetJUL>true</resetJUL>
     </contextListener>
