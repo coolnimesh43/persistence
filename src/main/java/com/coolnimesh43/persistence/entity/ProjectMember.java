@@ -15,7 +15,7 @@ import com.coolnimesh43.persistence.constant.PersistenceConstant;
 
 @Entity
 @Table(name = "project_member")
-public class ProjectMember {
+public class ProjectMember extends AbstractAuditEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

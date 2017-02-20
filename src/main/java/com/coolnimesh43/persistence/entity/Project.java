@@ -1,6 +1,5 @@
 package com.coolnimesh43.persistence.entity;
 
-import java.io.Serializable;
 import java.time.ZonedDateTime;
 
 import javax.persistence.Column;
@@ -25,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "project")
-public class Project implements Serializable {
+public class Project extends AbstractAuditEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

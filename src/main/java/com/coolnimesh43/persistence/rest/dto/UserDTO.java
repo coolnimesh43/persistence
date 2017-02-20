@@ -1,6 +1,6 @@
 package com.coolnimesh43.persistence.rest.dto;
 
-public class UserDTO {
+public class UserDTO extends AbstractAuditingDTO {
 
     private Long id;
     private String firstName;

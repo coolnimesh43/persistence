@@ -1,11 +1,19 @@
 package com.coolnimesh43.persistence.rest.dto;
 
-public class ProjectMemberDTO {
+import javax.validation.constraints.NotNull;
+
+public class ProjectMemberDTO extends AbstractAuditingDTO {
 
     private Long id;
+
     private String status;
+
+    @NotNull
     private Long projectId;
+
+    @NotNull
     private Long userId;
+
     private ProjectDTO projectDTO;
 
     public ProjectMemberDTO() {

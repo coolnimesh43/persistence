@@ -1,7 +1,7 @@
 package com.coolnimesh43.persistence.config.security;
 
 import org.springframework.data.domain.AuditorAware;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 /**
  * Spring jpa audit aware with spring security
@@ -9,13 +9,14 @@ import org.springframework.stereotype.Component;
  * @author coolnimesh43
  *
  */
-@Component(value = "springSecurityAuditorAware")
+@Service("springSecurityAuditorAware")
 public class SpringSecurityAuditAware implements AuditorAware<String> {
 
     @Override
     public String getCurrentAuditor() {
+        System.out.println("Get current auditor called.");
         String userName = SecurityUtil.getCurrentUserLogin();
-        return (userName != null ? userName : "Admin");
+        return (userName != null ? userName : "admin");
     }
 
 }

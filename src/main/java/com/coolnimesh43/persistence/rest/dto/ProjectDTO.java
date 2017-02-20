@@ -2,12 +2,17 @@ package com.coolnimesh43.persistence.rest.dto;
 
 import java.time.ZonedDateTime;
 
+import javax.validation.constraints.NotNull;
+
 import com.coolnimesh43.persistence.enums.ProjectPriority;
 
-public class ProjectDTO {
+public class ProjectDTO extends AbstractAuditingDTO {
 
     private Long id;
+
+    @NotNull
     private String name;
+
     private ZonedDateTime startDate;
     private ZonedDateTime endDate;
     private ProjectPriority priority;
@@ -15,6 +20,9 @@ public class ProjectDTO {
     private String projectImage;
     private String projectAssetFolderName;
     private Long parentProjectId;
+
+    @NotNull
+    private String status;
 
     public ProjectDTO() {
         super();
@@ -30,6 +38,7 @@ public class ProjectDTO {
         this.projectImage = builder.projectImage;
         this.projectAssetFolderName = builder.projectAssetFolderName;
         this.parentProjectId = builder.parentProjectId;
+        this.status = builder.status;
     }
 
     public Long getId() {
@@ -104,6 +113,14 @@ public class ProjectDTO {
         this.parentProjectId = parentProjectId;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "ProjectDTO [id=" + id + ", name=" + name + ", startDate=" + startDate + ", endDate=" + endDate + ", priority=" + priority
@@ -121,6 +138,7 @@ public class ProjectDTO {
         private String projectImage;
         private String projectAssetFolderName;
         private Long parentProjectId;
+        private String status;
 
         public Builder id(Long id) {
             this.id = id;
@@ -164,6 +182,11 @@ public class ProjectDTO {
 
         public Builder parentProjectId(Long parentProjectId) {
             this.parentProjectId = parentProjectId;
+            return this;
+        }
+
+        public Builder status(String status) {
+            this.status = status;
             return this;
         }
 
