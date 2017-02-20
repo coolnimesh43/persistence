@@ -15,4 +15,5 @@ public interface ProjectService extends AbstractService<ProjectDTO, Long> {
      * @return {@link List} of {@link ProjectDTO}
      */
     List<ProjectDTO> findByName(String name);
+
 }

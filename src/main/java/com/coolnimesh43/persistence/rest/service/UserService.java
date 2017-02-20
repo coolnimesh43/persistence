@@ -56,4 +56,11 @@ public interface UserService extends AbstractService<UserDTO, Long> {
      */
     @Override
     void delete(Long id);
+
+    /**
+     * Get current logged in user
+     * 
+     * @return {@link User} The user entity if the user is logged in, else null.
+     */
+    User getCurrentLoggedInUser();
 }

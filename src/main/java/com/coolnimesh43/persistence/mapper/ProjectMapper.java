@@ -5,11 +5,12 @@ import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
+import org.mapstruct.ReportingPolicy;
 
 import com.coolnimesh43.persistence.entity.Project;
 import com.coolnimesh43.persistence.rest.dto.ProjectDTO;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ProjectMapper {
 
     @Mappings(value = { @Mapping(target = "parentProjectId", source = "parentProject.id") })

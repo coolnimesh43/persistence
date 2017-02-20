@@ -3,6 +3,8 @@ package com.coolnimesh43.persistence.config.security;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.codec.Hex;
@@ -10,6 +12,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TokenProvider {
+
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Value("${persistence.security.xauth.token}")
     private String secretKey;

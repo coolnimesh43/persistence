@@ -113,4 +113,14 @@ public class ProjectMemberServiceImpl implements ProjectMemberService {
         return null;
     }
 
+    @Override
+    public List<ProjectMemberDTO> findByUserId(Long userId) {
+        if (userId != null) {
+            List<ProjectMember> projectMembers =
+                    this.projectMemberRepository.findByUserIdAndStatus(userId, PersistenceConstant.Status.ACTIVE);
+            return this.projectMemberMapper.projectMembersToProjectMemberDTOs(projectMembers);
+        }
+        return new ArrayList<>();
+    }
+
 }

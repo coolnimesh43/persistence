@@ -46,4 +46,14 @@ public interface ProjectMemberService extends AbstractService<ProjectMemberDTO, 
     ProjectMemberDTO findOneByProjectIdAndUserIdAndStatus(Long projectId, Long userId, String status);
 
     ProjectMemberDTO findOneByProjectIdAndUserLoginAndStatus(Long projectId, String login, String status);
+
+    /**
+     * Get all projects assigned to given user.
+     * 
+     * @author coolnimesh43
+     * @param userId
+     *            {@link Long} The user's id that belongs to the projects.
+     * @return {@link List} of {@link ProjectMemberDTO} that the user belongs to.
+     */
+    List<ProjectMemberDTO> findByUserId(Long userId);
 }

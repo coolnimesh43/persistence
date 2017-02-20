@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.coolnimesh43.persistence.config.security.SecurityUtil;
 import com.coolnimesh43.persistence.entity.User;
 import com.coolnimesh43.persistence.exception.EntityNotFoundException;
 import com.coolnimesh43.persistence.mapper.UserMapper;
@@ -92,4 +93,13 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    public User getCurrentLoggedInUser() {
+        org.springframework.security.core.userdetails.User securityUser = SecurityUtil.getCurrentUser();
+        if (securityUser != null) {
+            String login = securityUser.getUsername();
+            User currentUser = this.findByLogin(login);
+            return currentUser != null ? currentUser : null;
+        }
+        return null;
+    }
 }

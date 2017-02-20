@@ -3,11 +3,12 @@ package com.coolnimesh43.persistence.mapper;
 import java.util.List;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
 
 import com.coolnimesh43.persistence.entity.User;
 import com.coolnimesh43.persistence.rest.dto.UserDTO;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface UserMapper {
 
     UserDTO userToUserDTO(User user);

@@ -11,4 +11,5 @@ import com.coolnimesh43.persistence.entity.Project;
 public interface ProjectRepository extends JpaRepository<Project, Long> {
 
     List<Project> findByName(String name);
+
 }

@@ -6,6 +6,7 @@ public class ProjectMemberDTO {
     private String status;
     private Long projectId;
     private Long userId;
+    private ProjectDTO projectDTO;
 
     public ProjectMemberDTO() {
         super();
@@ -48,6 +49,14 @@ public class ProjectMemberDTO {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public ProjectDTO getProjectDTO() {
+        return projectDTO;
+    }
+
+    public void setProjectDTO(ProjectDTO projectDTO) {
+        this.projectDTO = projectDTO;
     }
 
     @Override
