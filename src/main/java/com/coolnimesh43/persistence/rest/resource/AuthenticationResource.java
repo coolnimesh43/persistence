@@ -22,6 +22,7 @@ import com.coolnimesh43.persistence.config.security.Token;
 import com.coolnimesh43.persistence.config.security.TokenProvider;
 import com.coolnimesh43.persistence.constant.PersistenceConstant;
 import com.coolnimesh43.persistence.entity.User;
+import com.coolnimesh43.persistence.mapper.UserMapper;
 import com.coolnimesh43.persistence.rest.dto.SignInDTO;
 import com.coolnimesh43.persistence.rest.dto.SignInResponse;
 import com.coolnimesh43.persistence.rest.service.UserService;
@@ -42,6 +43,9 @@ public class AuthenticationResource {
     private UserService userService;
 
     @Inject
+    private UserMapper userMapper;
+
+    @Inject
     private AuthenticationManager authenticationManager;
 
     @RequestMapping(method = RequestMethod.POST)
@@ -54,6 +58,7 @@ public class AuthenticationResource {
                         new UsernamePasswordAuthenticationToken(signInDTO.getLogin(), signInDTO.getPassword());
                 Authentication authentication = this.authenticationManager.authenticate(token);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
+                response.setUser(this.userMapper.userToUserDTO(user));
             } else {
                 throw new UsernameNotFoundException("User not found with username: {}" + signInDTO.getLogin());
             }

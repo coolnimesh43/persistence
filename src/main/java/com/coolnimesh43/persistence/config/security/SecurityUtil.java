@@ -15,8 +15,16 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public class SecurityUtil {
+
     private final static SecureRandom sr = new SecureRandom();
     private static MessageDigest pdigest;
+    static {
+        try {
+            pdigest = MessageDigest.getInstance("SHA-512");
+        } catch (NoSuchAlgorithmException e) {
+            pdigest = null;
+        }
+    }
 
     private SecurityUtil() {
     }
@@ -90,14 +98,6 @@ public class SecurityUtil {
             }
         }
         return false;
-    }
-
-    static {
-        try {
-            pdigest = MessageDigest.getInstance("SHA-512");
-        } catch (NoSuchAlgorithmException e) {
-            pdigest = null;
-        }
     }
 
     public static String encodePassword(String password, String salt) {

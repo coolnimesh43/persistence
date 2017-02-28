@@ -8,7 +8,7 @@ public class Token {
     String token;
     long expires;
 
-    public Token(String token, long expires){
+    public Token(String token, long expires) {
         this.token = token;
         this.expires = expires;
     }
@@ -20,4 +20,10 @@ public class Token {
     public long getExpires() {
         return expires;
     }
+
+    @Override
+    public String toString() {
+        return "Token [token=" + token + ", expires=" + expires + "]";
+    }
+
 }
