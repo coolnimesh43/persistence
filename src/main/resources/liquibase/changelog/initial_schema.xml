@@ -78,7 +78,7 @@
 			<column name="priority" type="INT" />
 			<column name="project_asset_folder_name" type="VARCHAR(50)" />
 			<column name="project_image" type="VARCHAR(300)" />
-			<column name="start_date" type="BYTEA" />
+			<column name="start_date" type="timestamp" />
 			<column name="parent_project_id" type="BIGINT" />
 			<column name="status" type="VARCHAR(255)">
 				<constraints nullable="false" />
