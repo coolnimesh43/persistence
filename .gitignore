@@ -3,3 +3,4 @@
 .settings/
 target/
 catalina.base_IS_UNDEFINED/
+src/main/resources/persistent-server.yml
